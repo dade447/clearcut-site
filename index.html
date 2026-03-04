@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearCut Web — Quick, Simple, Reliable Websites for Trade Businesses</title>
+  <meta name="description" content="ClearCut Web builds professional websites for trade businesses in South Africa. Security, fencing, paving, borehole & landscaping contractors — get online fast." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ─────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:          #06090F;
+      --bg-surface:  #0D1117;
+      --bg-elevated: #151B25;
+      --glass:       rgba(255,255,255,0.03);
+      --glass-border:rgba(255,255,255,0.06);
+      --glass-hover: rgba(255,255,255,0.06);
+
+      --blue:        #2E7AB8;
+      --blue-light:  #4BA3D9;
+      --blue-glow:   rgba(46, 122, 184, 0.25);
+      --orange:      #E8762C;
+      --orange-light:#F5923E;
+      --orange-glow: rgba(232, 118, 44, 0.3);
+
+      --text:        #E8ECF1;
+      --text-secondary: #94A3B8;
+      --text-muted:  #546478;
+
+      --font-display: 'Sora', system-ui, sans-serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --max-w: 1200px;
+      --section-py: clamp(5rem, 9vw, 8rem);
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container { width: 90%; max-width: var(--max-w); margin: 0 auto; }
+
+    /* ── Dot grid background texture ───────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section, .trust-bar, .footer, .nav { position: relative; z-index: 1; }
+
+    /* ── Buttons ───────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.85rem 2rem;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+      box-shadow: 0 0 20px var(--orange-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .btn-primary:hover {
+      background: var(--orange-light);
+      border-color: var(--orange-light);
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px var(--orange-glow), 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .btn-glass {
+      background: var(--glass);
+      color: var(--text);
+      border-color: var(--glass-border);
+      backdrop-filter: blur(8px);
+    }
+    .btn-glass:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-blue {
+      background: transparent;
+      color: var(--blue-light);
+      border-color: rgba(46, 122, 184, 0.3);
+    }
+    .btn-outline-blue:hover {
+      background: rgba(46, 122, 184, 0.08);
+      border-color: var(--blue);
+      box-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    /* ── Navigation ────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 0;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(6, 9, 15, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.8rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      mask-image: radial-gradient(ellipse 90% 80% at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 0.8rem !important;
+      padding: 0.55rem 1.3rem !important;
+      background: var(--orange) !important;
+      color: #fff !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 0 15px var(--orange-glow) !important;
+      transition: all 0.3s !important;
+    }
+    .nav-cta:hover {
+      background: var(--orange-light) !important;
+      box-shadow: 0 0 25px var(--orange-glow) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-secondary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── Hero ──────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    /* Gradient mesh blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero-blob-1 {
+      width: 600px; height: 600px;
+      top: -150px; right: -100px;
+      background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+    }
+    .hero-blob-2 {
+      width: 450px; height: 450px;
+      bottom: -100px; left: -100px;
+      background: radial-gradient(circle, var(--orange) 0%, transparent 70%);
+      opacity: 0.2;
+    }
+    .hero-blob-3 {
+      width: 300px; height: 300px;
+      top: 40%; left: 35%;
+      background: radial-gradient(circle, var(--blue-light) 0%, transparent 70%);
+      opacity: 0.12;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 0 6rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232, 118, 44, 0.08);
+      color: var(--orange-light);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(232, 118, 44, 0.15);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.12;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-text {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Stats card — glass */
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+
+    .stats-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      backdrop-filter: blur(16px);
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 40px rgba(46, 122, 184, 0.06);
+    }
+
+    .stats-card-header {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .stat-row:last-child { border: none; }
+
+    .stat-label {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+    }
+    .stat-icon {
+      width: 34px; height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+    .stat-icon.blue { background: rgba(46, 122, 184, 0.12); color: var(--blue-light); }
+    .stat-icon.orange { background: rgba(232, 118, 44, 0.1); color: var(--orange); }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    /* ── Section styles ────────────────────────────── */
+    section { padding: var(--section-py) 0; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--orange);
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* ── Trust Bar ─────────────────────────────────── */
+    .trust-bar {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 2rem 0;
+    }
+
+    .trust-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .trust-icon {
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    /* ── Services ───────────────────────────────────── */
+    .services { background: var(--bg); }
+
+    .services-header { text-align: center; margin-bottom: 3.5rem; }
+    .services-header .section-subtitle { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      padding: 2rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .service-card:hover {
+      border-color: rgba(46, 122, 184, 0.3);
+      background: var(--glass-hover);
+      box-shadow: 0 0 30px var(--blue-glow), 0 10px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      margin-bottom: 1.3rem;
+      font-size: 1.1rem;
+    }
+    .service-icon.navy-bg { background: rgba(46, 122, 184, 0.1); color: var(--blue-light); }
+    .service-icon.blue-bg { background: rgba(75, 163, 217, 0.1); color: var(--blue-light); }
+    .service-icon.orange-bg { background: rgba(232, 118, 44, 0.1); color: var(--orange); }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ── Industries ─────────────────────────────────── */
+    .industries { background: var(--bg-surface); }
+
+    .industries-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .industry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+
+    .industry-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .industry-tag:hover {
+      border-color: rgba(46, 122, 184, 0.3);
+      color: var(--blue-light);
+      box-shadow: 0 0 15px var(--blue-glow);
+    }
+    .industry-tag .tag-icon { font-size: 0.9rem; }
+
+    .industries-visual { position: relative; }
+
+    .mockup-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--blue-glow);
+    }
+    .mockup-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .mockup-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .mockup-dot.red { background: #FF5F57; }
+    .mockup-dot.yellow { background: #FEBC2E; }
+    .mockup-dot.green { background: #28C840; }
+    .mockup-url {
+      flex: 1; margin-left: 0.6rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 4px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .mockup-body { padding: 1.8rem; }
+    .mockup-headline {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .mockup-text {
+      height: 7px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      margin-bottom: 0.45rem;
+    }
+    .mockup-text.w75 { width: 75%; }
+    .mockup-text.w90 { width: 90%; }
+    .mockup-text.w60 { width: 60%; }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+    .mockup-block {
+      height: 60px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+    }
+    .mockup-block.colored {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      opacity: 0.35;
+    }
+
+    .mockup-float {
+      position: absolute;
+      top: -16px; right: -24px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 15px rgba(40, 200, 64, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    .mockup-float-icon {
+      width: 30px; height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(40, 200, 64, 0.1);
+      color: #28C840;
+      font-size: 0.85rem;
+    }
+    .mockup-float-text { font-size: 0.7rem; font-weight: 600; color: var(--text); }
+    .mockup-float-sub { font-size: 0.6rem; color: var(--text-muted); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── Process ────────────────────────────────────── */
+    .process { background: var(--bg); }
+
+    .process-header { text-align: center; margin-bottom: 4rem; }
+    .process-header .section-subtitle { margin: 0 auto; }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 12.5%;
+      width: 75%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border), var(--glass-border), transparent);
+    }
+
+    .process-step { text-align: center; position: relative; padding: 0 1rem; }
+
+    .step-number {
+      width: 64px; height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 2;
+      transition: all 0.4s;
+    }
+    .process-step:hover .step-number {
+      border-color: var(--orange);
+      color: var(--orange);
+      box-shadow: 0 0 25px var(--orange-glow);
+    }
+
+    .process-step h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .process-step p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Pricing ────────────────────────────────────── */
+    .pricing { background: var(--bg-surface); }
+
+    .pricing-header { text-align: center; margin-bottom: 3.5rem; }
+    .pricing-header .section-subtitle { margin: 0 auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 2.2rem 1.8rem;
+      backdrop-filter: blur(8px);
+      position: relative;
+      transition: all 0.4s;
+    }
+    .pricing-card.featured {
+      border-color: rgba(232, 118, 44, 0.3);
+      box-shadow: 0 0 40px var(--orange-glow), 0 16px 50px rgba(0,0,0,0.3);
+    }
+    .pricing-card.featured .pricing-badge {
+      position: absolute;
+      top: -11px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.9rem;
+      border-radius: 100px;
+      box-shadow: 0 0 15px var(--orange-glow);
+    }
+
+    .pricing-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .pricing-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.02em;
+    }
+    .pricing-price span {
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .pricing-period {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .pricing-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.8rem;
+    }
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .pricing-check {
+      width: 17px; height: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(46, 122, 184, 0.12);
+      color: var(--blue-light);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn { width: 100%; justify-content: center; }
+
+    /* ── Social Proof ──────────────────────────────── */
+    .social-proof {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232, 118, 44, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .proof-content { text-align: center; position: relative; z-index: 2; }
+
+    .proof-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.55;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .proof-author {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .proof-author strong { color: var(--orange); }
+
+    .proof-stats {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--glass-border);
+    }
+    .proof-stat-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .proof-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── CTA ────────────────────────────────────────── */
+    .cta { background: var(--bg-surface); text-align: center; }
+
+    .cta-box {
+      position: relative;
+      border-radius: var(--radius);
+      padding: 4rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+    /* Gradient border glow */
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--radius);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(46,122,184,0.3), transparent 40%, transparent 60%, rgba(232,118,44,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .cta-box .section-title { color: var(--text); margin-bottom: 1rem; }
+    .cta-box p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 0.6rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .cta-input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      transition: border-color 0.3s;
+    }
+    .cta-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 15px var(--blue-glow);
+    }
+    .cta-input::placeholder { color: var(--text-muted); }
+
+    /* ── Footer ─────────────────────────────────────── */
+    .footer {
+      background: var(--bg);
+      padding: 3.5rem 0 2rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .footer-brand img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      mask-image: radial-gradient(ellipse 90% 80% at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .footer-location {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links a {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      padding: 0.25rem 0;
+      transition: color 0.3s;
+      opacity: 0.7;
+    }
+    .footer-links a:hover { color: var(--orange-light); opacity: 1; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+    }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); }
+
+    .footer-social { display: flex; gap: 0.8rem; }
+    .footer-social a {
+      width: 32px; height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: all 0.3s;
+    }
+    .footer-social a:hover {
+      border-color: rgba(232, 118, 44, 0.3);
+      color: var(--orange);
+      box-shadow: 0 0 12px var(--orange-glow);
+    }
+
+    /* ── Animations ─────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+
+    /* ── WhatsApp Floating Button ──────────────────── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 99;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.35), 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: wa-breathe 2.8s ease-in-out infinite;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px rgba(37, 211, 102, 0.5), 0 6px 20px rgba(0,0,0,0.4);
+      animation: none;
+    }
+    .whatsapp-float svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+
+    /* Breathing / pulse ring */
+    .whatsapp-float::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, 0.4);
+      animation: wa-ring 2.8s ease-in-out infinite;
+    }
+
+    @keyframes wa-breathe {
+      0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.3), 0 4px 15px rgba(0,0,0,0.3); }
+      50%      { box-shadow: 0 0 30px rgba(37, 211, 102, 0.5), 0 4px 20px rgba(0,0,0,0.35); transform: scale(1.05); }
+    }
+    @keyframes wa-ring {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%      { opacity: 0; transform: scale(1.35); }
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .industries-content { grid-template-columns: 1fr; gap: 3rem; }
+      .industries-visual { order: -1; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+      .process-steps::before { display: none; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 9, 15, 0.97);
+        backdrop-filter: blur(20px);
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 200;
+      }
+      .nav-links.active a {
+        font-size: 1.15rem;
+        color: var(--text) !important;
+      }
+      .nav-close {
+        display: none;
+        position: absolute;
+        top: 1.5rem; right: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 1.6rem;
+        cursor: pointer;
+      }
+      .nav-links.active .nav-close { display: block; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 2rem; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .proof-stats { flex-direction: column; gap: 1.5rem; }
+      .cta-form { flex-direction: column; }
+      .cta-box { padding: 3rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="ClearCut Web — Quick, Simple, Reliable" />
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <button class="nav-close" id="navClose">&times;</button>
+        <a href="#services">Services</a>
+        <a href="#industries">Industries</a>
+        <a href="#process">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="nav-cta">Get Started</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+
+    <div class="container hero-content">
+      <div>
+        <div class="hero-badge">&#9889; Based in Midrand, South Africa</div>
+        <h1>Professional Websites for <span class="accent">Trade Businesses</span> That Win Clients</h1>
+        <p class="hero-text">
+          You're great at what you do — fencing, paving, drilling, security. We make sure your customers can find you online. Fast setup, zero hassle.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Get Your Free Quote &#8594;</a>
+          <a href="#process" class="btn btn-glass">See How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="stats-card">
+          <div class="stats-card-header">Why Go Online?</div>
+          <div class="stat-row">
+            <div class="stat-label">
+              <div class="stat-icon blue">&#128269;</div>
+              <span>Google searches daily</span>
+            </div>
+            <div class="stat-value">8.5B</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label">
+              <div class="stat-icon orange">&#128200;</div>
+              <span>Buyers research online first</span>
+            </div>
+            <div class="stat-value">81%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label">
+              <div class="stat-icon blue">&#128241;</div>
+              <span>Local searches lead to action</span>
+            </div>
+            <div class="stat-value">76%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-label">
+              <div class="stat-icon orange">&#9201;</div>
+              <span>Our turnaround time</span>
+            </div>
+            <div class="stat-value">7 Days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ TRUST BAR ═══════════════ -->
+  <div class="trust-bar">
+    <div class="container trust-inner">
+      <div class="trust-item">
+        <div class="trust-icon">&#128640;</div>
+        <span>Live in 7 days</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">&#128274;</div>
+        <span>SSL secure</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">&#128241;</div>
+        <span>Mobile-first design</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">&#127470;&#127462;</div>
+        <span>South African based</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">&#128172;</div>
+        <span>WhatsApp support</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════ SERVICES ═══════════════ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header fade-up">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Everything You Need to Get Found Online</h2>
+        <p class="section-subtitle">We handle the tech so you can focus on your trade. No jargon, no fuss — just a website that brings you leads.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <div class="service-icon navy-bg">&#127912;</div>
+          <h3>Custom Website Design</h3>
+          <p>A professional site built to showcase your work, display your services, and make it easy for customers to contact you.</p>
+        </div>
+        <div class="service-card fade-up fade-up-delay-1">
+          <div class="service-icon blue-bg">&#128270;</div>
+          <h3>Google Visibility</h3>
+          <p>We set up your Google Business Profile and optimise your site so local customers find you when they search.</p>
+        </div>
+        <div class="service-card fade-up fade-up-delay-2">
+          <div class="service-icon orange-bg">&#128241;</div>
+          <h3>Mobile-Ready</h3>
+          <p>Your site looks and works perfectly on phones — because that's where most of your customers are browsing.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon orange-bg">&#9889;</div>
+          <h3>Speed Optimised</h3>
+          <p>Fast-loading pages keep visitors engaged. We build lean, quick sites — even on slower South African connections.</p>
+        </div>
+        <div class="service-card fade-up fade-up-delay-1">
+          <div class="service-icon navy-bg">&#128172;</div>
+          <h3>WhatsApp Integration</h3>
+          <p>One-tap WhatsApp buttons so customers can message you instantly — the way South Africans prefer to communicate.</p>
+        </div>
+        <div class="service-card fade-up fade-up-delay-2">
+          <div class="service-icon blue-bg">&#128736;</div>
+          <h3>Ongoing Support</h3>
+          <p>Need a change? We're a WhatsApp message away. Updates, edits, and support handled quickly and personally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ INDUSTRIES ═══════════════ -->
+  <section class="industries" id="industries">
+    <div class="container industries-content">
+      <div class="fade-up">
+        <div class="section-label">Who We Serve</div>
+        <h2 class="section-title">Built for Trades &amp; Service Businesses</h2>
+        <p class="section-subtitle">
+          We specialise in working with skilled trade businesses — people who are experts at their craft but don't have time to figure out websites. If your customers find you by word of mouth, imagine what happens when they also find you on Google.
+        </p>
+        <div class="industry-tags">
+          <div class="industry-tag"><span class="tag-icon">&#128737;</span> Security Gate Installers</div>
+          <div class="industry-tag"><span class="tag-icon">&#9889;</span> Electric Fence Companies</div>
+          <div class="industry-tag"><span class="tag-icon">&#127793;</span> Landscaping Contractors</div>
+          <div class="industry-tag"><span class="tag-icon">&#129521;</span> Paving Specialists</div>
+          <div class="industry-tag"><span class="tag-icon">&#128167;</span> Borehole Drillers</div>
+          <div class="industry-tag"><span class="tag-icon">&#127968;</span> Home Renovation</div>
+          <div class="industry-tag"><span class="tag-icon">&#128295;</span> Plumbing &amp; Electrical</div>
+          <div class="industry-tag"><span class="tag-icon">&#127774;</span> Solar Installers</div>
+        </div>
+      </div>
+
+      <div class="industries-visual fade-up fade-up-delay-1">
+        <div class="mockup-card">
+          <div class="mockup-bar">
+            <div class="mockup-dot red"></div>
+            <div class="mockup-dot yellow"></div>
+            <div class="mockup-dot green"></div>
+            <div class="mockup-url">&#128274; yourbusiness.co.za</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-headline">Secure Fencing Solutions, Gauteng</div>
+            <div class="mockup-text w90"></div>
+            <div class="mockup-text w75"></div>
+            <div class="mockup-text w60"></div>
+            <div class="mockup-grid">
+              <div class="mockup-block colored"></div>
+              <div class="mockup-block"></div>
+              <div class="mockup-block"></div>
+              <div class="mockup-block colored"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-float">
+          <div class="mockup-float-icon">&#10003;</div>
+          <div>
+            <div class="mockup-float-text">Site is Live!</div>
+            <div class="mockup-float-sub">Deployed in 5 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ PROCESS ═══════════════ -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="process-header fade-up">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Four Simple Steps to Go Live</h2>
+        <p class="section-subtitle">No technical knowledge required. We guide you through every step — you just need to show up.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step fade-up">
+          <div class="step-number">1</div>
+          <h3>Quick Chat</h3>
+          <p>Tell us about your business over a 15-minute call or WhatsApp. We'll ask the right questions.</p>
+        </div>
+        <div class="process-step fade-up fade-up-delay-1">
+          <div class="step-number">2</div>
+          <h3>We Design</h3>
+          <p>Our team builds your site using your branding, photos, and content. You review and give feedback.</p>
+        </div>
+        <div class="process-step fade-up fade-up-delay-2">
+          <div class="step-number">3</div>
+          <h3>Go Live</h3>
+          <p>Once approved, your site goes live with hosting, SSL, and a professional domain — all sorted.</p>
+        </div>
+        <div class="process-step fade-up fade-up-delay-3">
+          <div class="step-number">4</div>
+          <h3>Grow</h3>
+          <p>We set up Google and keep your site updated. You focus on your business; we handle the web.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ PRICING ═══════════════ -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing-header fade-up">
+        <div class="section-label">Simple Pricing</div>
+        <h2 class="section-title">Transparent, No-Surprise Pricing</h2>
+        <p class="section-subtitle">Every plan includes hosting, SSL, mobile design, and WhatsApp support. No hidden fees.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card fade-up">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-desc">Perfect for new businesses needing a professional online presence.</div>
+          <div class="pricing-price">R2,999 <span>once-off</span></div>
+          <div class="pricing-period">+ R299/month hosting &amp; support</div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Up to 3 pages</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Mobile responsive</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> WhatsApp button</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Contact form</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Google Business setup</div>
+          </div>
+          <a href="#contact" class="btn btn-outline-blue">Choose Starter</a>
+        </div>
+
+        <div class="pricing-card featured fade-up fade-up-delay-1">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-name">Professional</div>
+          <div class="pricing-desc">For established businesses ready to dominate their local area online.</div>
+          <div class="pricing-price">R5,499 <span>once-off</span></div>
+          <div class="pricing-period">+ R399/month hosting &amp; support</div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Up to 7 pages</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Project gallery</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> SEO optimised</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> WhatsApp &amp; call buttons</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Google Analytics</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Monthly content update</div>
+          </div>
+          <a href="#contact" class="btn btn-primary">Choose Professional</a>
+        </div>
+
+        <div class="pricing-card fade-up fade-up-delay-2">
+          <div class="pricing-name">Premium</div>
+          <div class="pricing-desc">Full digital presence with advanced features and priority support.</div>
+          <div class="pricing-price">R9,999 <span>once-off</span></div>
+          <div class="pricing-period">+ R599/month hosting &amp; support</div>
+          <div class="pricing-features">
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Unlimited pages</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Booking / quote system</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Blog / news section</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Advanced SEO</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Social media links</div>
+            <div class="pricing-feature"><div class="pricing-check">&#10003;</div> Priority WhatsApp support</div>
+          </div>
+          <a href="#contact" class="btn btn-outline-blue">Choose Premium</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ SOCIAL PROOF ═══════════════ -->
+  <section class="social-proof">
+    <div class="container proof-content fade-up">
+      <div class="section-label" style="color: var(--orange-light); justify-content: center;">What Our Clients Say</div>
+      <p class="proof-quote">
+        "I had no idea how to get a website. ClearCut handled everything — I just sent photos on WhatsApp and a week later my site was live. Now I get calls from Google every week."
+      </p>
+      <p class="proof-author"><strong>Thabo M.</strong> — Electric Fence Installer, Centurion</p>
+
+      <div class="proof-stats">
+        <div>
+          <div class="proof-stat-number">50+</div>
+          <div class="proof-stat-label">Trade Businesses Online</div>
+        </div>
+        <div>
+          <div class="proof-stat-number">7</div>
+          <div class="proof-stat-label">Average Days to Launch</div>
+        </div>
+        <div>
+          <div class="proof-stat-number">98%</div>
+          <div class="proof-stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ CTA ═══════════════ -->
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-box fade-up">
+        <div class="section-label" style="justify-content:center">Get Started</div>
+        <h2 class="section-title">Ready to Get Your Business Online?</h2>
+        <p>Drop your details and we'll get back to you within 24 hours with a free, no-obligation quote. Or message us directly on WhatsApp.</p>
+        <form class="cta-form" onsubmit="handleSubmit(event)">
+          <input type="tel" class="cta-input" placeholder="Your phone number" required />
+          <button type="submit" class="btn btn-primary">Get My Quote</button>
+        </form>
+        <p style="margin-top:1.2rem; font-size:0.78rem; color:var(--text-muted);">
+          Or WhatsApp us directly: <a href="https://wa.me/27784525345" style="color:var(--blue-light); font-weight:600;">+27 78 452 5345</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">
+            <img src="logo.png" alt="ClearCut Web" />
+          </div>
+          <p class="footer-desc">Quick, Simple, Reliable. Professional websites for South African trade businesses that drive real leads.</p>
+          <div class="footer-location">&#128205; Midrand, Gauteng, South Africa</div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Services</div>
+          <div class="footer-links">
+            <a href="#services">Website Design</a>
+            <a href="#services">Google Setup</a>
+            <a href="#services">Mobile Optimisation</a>
+            <a href="#services">WhatsApp Integration</a>
+            <a href="#services">Ongoing Support</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Industries</div>
+          <div class="footer-links">
+            <a href="#industries">Security &amp; Fencing</a>
+            <a href="#industries">Paving &amp; Landscaping</a>
+            <a href="#industries">Borehole Drilling</a>
+            <a href="#industries">Solar Installation</a>
+            <a href="#industries">Home Renovation</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:hello@clearcutweb.co.za">hello@clearcutweb.co.za</a>
+            <a href="https://wa.me/27784525345">WhatsApp Us</a>
+            <a href="#contact">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2026 ClearCut Web. All rights reserved.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">&#9679;</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════ WHATSAPP FLOAT ═══════════════ -->
+  <a href="https://wa.me/27784525345" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script>
+    // Navbar scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navClose = document.getElementById('navClose');
+
+    navToggle.addEventListener('click', () => navLinks.classList.add('active'));
+    navClose.addEventListener('click', () => navLinks.classList.remove('active'));
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('active'));
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Sent! \u2713';
+      btn.style.background = '#28C840';
+      btn.style.borderColor = '#28C840';
+      btn.style.boxShadow = '0 0 20px rgba(40, 200, 64, 0.3)';
+      setTimeout(() => {
+        btn.textContent = 'Get My Quote';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.boxShadow = '';
+        input.value = '';
+      }, 3000);
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
