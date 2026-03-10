@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <!-- C Shape -->
+    <path d="M 10 10 L 70 10 L 70 30 L 30 30 L 30 70 L 70 70 L 70 90 L 10 90 Z" fill="#10B981" />
+    
+    <!-- W / Inner shape overlapping -->
+    <!-- The structure is interlocking. The actual CSS has a C and a reverse C/W built from borders. -->
+    <path d="M 30 10 L 90 10 L 90 90 L 30 90 L 30 70 L 70 70 L 70 30 L 30 30 Z" fill="#10B981" opacity="0.8"/>
+    
+    <rect x="40" y="40" width="20" height="20" fill="#064E3B" />
+</svg>
