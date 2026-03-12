@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ClearCut Web - Invoice INV-0001</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "emerald-brand": "#10b981",
+              "charcoal": "#1a1a1a",
+            },
+            fontFamily: {
+              "serif": ["Playfair Display", "serif"],
+              "sans": ["Inter", "sans-serif"]
+            },
+          },
+        },
+      }
+    </script>
+    
+    <style>
+      body {
+        background-color: #f3f4f6;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page-container {
+        /* Standard A4 dimensions roughly for screen viewing */
+        max-width: 210mm;
+        margin: 2rem auto;
+        background-color: white;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        padding: 40px 50px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+      
+      /* Base typography */
+      .font-serif { font-family: 'Playfair Display', serif; }
+      .font-sans { font-family: 'Inter', sans-serif; }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 10mm;
+        }
+        html {
+          font-size: 85%; /* Reduce default font sizes across the board for printing */
+        }
+        body { 
+          background-color: white; 
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .page-container { 
+          margin: 0; 
+          padding: 0;
+          box-shadow: none; 
+          max-width: 100%;
+          border: none;
+          page-break-after: avoid; /* Encourage keeping on a single page */
+          /* Using transform allows it to shrink slightly, avoiding hard overflow */
+          transform: scale(0.95);
+          transform-origin: top left;
+        }
+        .print-btn { display: none !important; }
+      }
+    </style>
+</head>
+<body class="text-charcoal font-sans antialiased">
+    
+    <!-- Action Bar (Hidden in Print) -->
+    <div class="print-btn text-center py-6">
+        <button onclick="window.print()" class="px-6 py-2.5 bg-emerald-brand text-white font-medium rounded-lg shadow-md hover:bg-emerald-600 transition-colors inline-flex items-center space-x-2">
+            <span class="material-symbols-outlined text-[20px]">print</span>
+            <span>Print Invoice</span>
+        </button>
+    </div>
+
+    <!-- A4 Page Container -->
+    <div class="page-container relative">
+        <!-- Accent Bar top -->
+        <div class="h-2 w-full bg-emerald-brand absolute top-0 left-0"></div>
+        
+        <!-- Header -->
+        <header class="flex justify-between items-start mt-6 mb-10">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 relative text-emerald-brand">
+                    <div class="absolute top-0 left-0 w-5 h-5 border-l-[4px] border-t-[4px] border-current"></div>
+                    <div class="absolute bottom-0 right-0 w-5 h-5 border-r-[4px] border-b-[4px] border-current"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-emerald-brand"></div>
+                </div>
+                <div>
+                    <span class="text-3xl font-serif font-extrabold text-charcoal leading-none block">ClearCut <span class="font-sans font-light text-emerald-brand ml-0.5">Web</span></span>
+                    <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold block mt-1">Quick, Simple, Reliable.</span>
+                </div>
+            </div>
+            <div class="text-right">
+                <h1 class="text-4xl font-serif font-extrabold text-slate-100 uppercase tracking-tight">Invoice</h1>
+            </div>
+        </header>
+
+        <!-- Details -->
+        <div class="grid grid-cols-2 gap-8 mb-10 pb-8 border-b border-slate-100">
+            <div>
+                <h3 class="text-xs font-bold text-emerald-brand uppercase tracking-wider mb-2">Billed From</h3>
+                <div class="text-sm text-slate-600 space-y-1">
+                    <p class="font-bold text-charcoal text-base">2021/792302/07 t/a ClearCut Web</p>
+                    <p>3 Midway Heights, 15 Segal Rd</p>
+                    <p>Halfway Gardens, Midrand, 2000</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-end">
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 w-full max-w-[280px]">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-[13px] text-slate-500">Invoice No:</span>
+                        <span class="text-[13px] font-bold text-charcoal">INV-0001</span>
+                    </div>
+                    <div class="flex justify-between mb-3 border-b border-slate-200 pb-3">
+                        <span class="text-[13px] text-slate-500">Invoice Date:</span>
+                        <span class="text-[13px] font-medium text-charcoal">05 / 03 / 2026</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-[13px] font-bold text-slate-500">Due Date:</span>
+                        <span class="text-[13px] font-bold text-emerald-brand">12 / 03 / 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bill To -->
+        <div class="mb-8">
+            <h3 class="text-xs font-bold text-emerald-brand uppercase tracking-wider mb-2">Bill To</h3>
+            <div class="text-sm text-slate-600 space-y-1">
+                <p class="font-bold text-charcoal text-base">Gontse Air Conditioning & Heating (Pty) Ltd</p>
+                <p>1361 Rector Street</p>
+                <p>Diepsloot Ext 4. Johannesburg</p>
+                <p class="pt-1 text-slate-500 text-[13px]">Email: nelisiwekgabo7@gmail.com</p>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="mb-6 rounded-lg border border-slate-200 overflow-hidden">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-charcoal text-white text-[11px] uppercase tracking-wider">
+                        <th class="py-3 px-4 font-medium w-10 text-center text-slate-300">#</th>
+                        <th class="py-3 px-4 font-medium">Description</th>
+                        <th class="py-3 px-4 font-medium text-center w-16">Qty</th>
+                        <th class="py-3 px-4 font-medium text-right w-28">Price (R)</th>
+                        <th class="py-3 px-4 font-medium text-right w-32 bg-slate-800">Amount (R)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-[14px] divide-y divide-slate-100">
+                    <tr>
+                        <td class="py-3 px-4 text-center text-slate-400">1</td>
+                        <td class="py-3 px-4 text-charcoal font-medium">Website Design & Development (Once off)</td>
+                        <td class="py-3 px-4 text-center text-slate-600">1</td>
+                        <td class="py-3 px-4 text-right text-slate-600">599.00</td>
+                        <td class="py-3 px-4 text-right font-bold text-charcoal bg-slate-50">599.00</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-center text-slate-400">2</td>
+                        <td class="py-3 px-4 text-charcoal font-medium">SSL Certificate (Annually)</td>
+                        <td class="py-3 px-4 text-center text-slate-600">1</td>
+                        <td class="py-3 px-4 text-right text-slate-600">99.00</td>
+                        <td class="py-3 px-4 text-right font-bold text-charcoal bg-slate-50">99.00</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-center text-slate-400">3</td>
+                        <td class="py-3 px-4 text-charcoal font-medium flex flex-col pt-1">Web Hosting (Monthly) <span class="text-[11px] text-slate-400 font-normal">50% discount month 1</span></td>
+                        <td class="py-3 px-4 text-center text-slate-600 align-top pt-4">1</td>
+                        <td class="py-3 px-4 text-right text-slate-600 align-top pt-4">150.00</td>
+                        <td class="py-3 px-4 text-right font-bold text-charcoal bg-slate-50 align-top pt-4">150.00</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-center text-slate-400">4</td>
+                        <td class="py-3 px-4 text-charcoal font-medium flex flex-col pt-1">Company profile <span class="text-[11px] text-slate-400 font-normal">(Complimentary)</span></td>
+                        <td class="py-3 px-4 text-center text-slate-600 align-top pt-4">1</td>
+                        <td class="py-3 px-4 text-right text-slate-600 align-top pt-4">0.00</td>
+                        <td class="py-3 px-4 text-right font-bold text-charcoal bg-slate-50 align-top pt-4">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="flex justify-end mb-12">
+            <div class="w-64 bg-emerald-brand/10 border border-emerald-brand/20 rounded-lg p-4 flex justify-between items-center">
+                <span class="text-[13px] font-bold uppercase text-charcoal tracking-wide">Total</span>
+                <span class="text-xl font-serif font-extrabold text-emerald-brand">R 848.00</span>
+            </div>
+        </div>
+
+        <div class="flex-grow"></div>
+
+        <!-- Footer / Payment Info -->
+        <div class="mt-8 pt-6 border-t border-slate-100 grid grid-cols-2 gap-8 items-start">
+            <!-- Payment Info -->
+            <div>
+                <h4 class="text-[11px] font-bold text-emerald-brand uppercase tracking-wider mb-3 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">account_balance</span>
+                    Banking Details
+                </h4>
+                <div class="bg-slate-50 border border-slate-100 rounded-lg p-4 text-[13px] text-slate-600 space-y-1.5">
+                    <div class="flex justify-between"><span>Bank:</span> <strong class="text-charcoal inline-block text-right">Capitec Business</strong></div>
+                    <div class="flex justify-between border-b border-slate-200 pb-1.5 mb-1.5 align-top"><span>Account Name:</span> <strong class="text-charcoal inline-block text-right leading-snug">2021/792302/07<br>t/a ClearCut Web</strong></div>
+                    <div class="flex justify-between"><span>Account Type:</span> <strong class="text-charcoal inline-block text-right">Business</strong></div>
+                    <div class="flex justify-between"><span>Account No:</span> <strong class="text-charcoal font-mono inline-block text-right">1052 7760 19</strong></div>
+                    <div class="flex justify-between"><span>Branch Code:</span> <strong class="text-charcoal font-mono inline-block text-right">470010</strong></div>
+                    <div class="flex justify-between mt-2 pt-2 border-t border-emerald-brand/20 bg-emerald-brand/5 -mx-4 -mb-4 px-4 py-2 rounded-b-lg">
+                        <span class="font-semibold text-emerald-brand">Reference:</span> 
+                        <strong class="text-charcoal font-mono">INV-0001</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col h-full justify-between pt-1">
+                <div>
+                    <h4 class="text-[11px] font-bold text-emerald-brand uppercase tracking-wider mb-3 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">info</span>
+                        Notes
+                    </h4>
+                    <div class="text-[13px] text-slate-500 space-y-2">
+                        <p>Payment is due within <strong class="text-charcoal font-medium">7 days</strong> of invoice date.</p>
+                        <p>Please use your invoice number (<strong class="text-charcoal font-medium">INV-0001</strong>) as a payment reference so we can easily track your deposit.</p>
+                    </div>
+                </div>
+                
+                <div class="text-right text-[11px] text-slate-400 mt-6 space-y-1 self-end">
+                    <p class="font-medium text-slate-500 text-[12px] mb-1">Thank you for your business!</p>
+                    <p>www.clearcutweb.co.za</p>
+                    <p>+27 69 489 0725 &nbsp;|&nbsp; Midrand, 2000</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
